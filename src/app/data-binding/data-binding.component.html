@@ -1,0 +1,108 @@
+<section class="property-binding">
+    <article>
+        <h3>Interpolation</h3>
+        <p>String renderizada com interpolação: {{ url }}</p>
+        <p>Resultado de 1 + 1 = {{1 + 1}}</p>
+        <p>1 + 2 = {{ getValor() }}</p>
+    </article>
+
+    <article>
+        <h3>Property Binding</h3>
+        <img src="{{imageUrl}}">
+        <img [src]="imageUrl">
+    </article>
+
+    <article>
+        <h3>Class e Style Binding</h3>
+        <div>
+            Selecione uma classe:
+            <select #classe (change)="0">
+                <option value="alert-success">Sucesso</option>
+                <option value="alert-info">Info</option>
+                <option value="alert-warning">Alerta</option>
+                <option value="alert-danger">Erro</option>
+            </select>
+            <br><br>
+
+            <div class="alert {{ classe.value }}" role="alert">
+                Texto colorido conforme valor do combobox
+            </div>
+
+            <div class="alert " role="alert" [class.alert-success]="classe.value == 'alert-success'">
+                success
+            </div>
+            <div class="alert " role="alert" [class.alert-info]="classe.value == 'alert-info'">
+                info
+            </div>
+            <div class="alert " role="alert" [class.alert-warning]="classe.value == 'alert-warning'">
+                warning
+            </div>
+            <div class="alert " role="alert" [class.alert-danger]="classe.value == 'alert-danger'">
+                danger
+            </div>
+
+
+            <div class="alert " role="alert" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
+                Esse texto somente aparece em caso de erro.
+            </div>
+            
+        </div>
+    </article>
+
+    <article>
+        <h3>Event binding</h3>
+        <div>
+            <button (click)="botaoClick()" class="btn btn-primary">Me click</button>
+            <br><br>
+
+            <input type="text" 
+                (keyup)="onKeyUp($event)" 
+                (keyup.enter)="salvarValor(campoInput.value)"
+                #campoInput />
+
+            <p>Valor atual: {{valorAtual}}</p>
+            <p>Valor salvo: {{valorSalvo}}</p>
+            <br>
+
+            <span
+                (mouseover)="onMouseOverOut()"
+                (mouseout)="onMouseOverOut()"
+                [class.highlight]="isMouseOver"
+            >
+                Passe o mouse sobre mim
+            </span>
+        </div>
+    </article>
+
+    <br><br>
+
+    <section class="two-way-binding">
+        <article>
+            <h3>Two-way data binding</h3>
+            <div>
+                <input [(ngModel)]="nome" >
+                <p>Você digitou: {{nome}}</p>
+            </div>
+
+            <div>
+                <input type="text" [(ngModel)]="pessoa.nome">
+                <input type="text" [(ngModel)]="pessoa.idade">
+
+                <p>Menu nome é {{pessoa.nome}} e tenho {{pessoa.idade}} anos</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="input-output-properties">
+        <article>
+            <h3>Input/Output Properties</h3>
+            <app-curso [nome]="nomeDoCurso"></app-curso>
+            <contador
+                [valor]="valorInicial"
+                (mudouValor)="onMudouValor($event)">
+
+            </contador>
+        </article>
+    </section>
+</section>
+<br>
